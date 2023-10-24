@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-Future<String> submitForm(
-    TextEditingController email, TextEditingController password) async {
+Future<String> submitForm(String email, String password) async {
   var client = http.Client();
   var response = await client.post(
       Uri.http('localhost:8000', '/administration/login/'),
