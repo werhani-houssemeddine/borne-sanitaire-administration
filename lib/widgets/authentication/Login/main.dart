@@ -1,5 +1,5 @@
+import 'package:borne_sanitaire_admin/widgets/authentication/Login/widgets/main.dart';
 import 'package:flutter/material.dart';
-import 'login.service.dart';
 
 void main() => runApp(const Login());
 
@@ -65,6 +65,14 @@ class _LoginFormState extends State<_LoginForm> {
     super.dispose();
   }
 
+  bool toggleSecureText() {
+    setState(() {
+      passToggle = !passToggle;
+    });
+
+    return passToggle;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -72,88 +80,13 @@ class _LoginFormState extends State<_LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            width: 400,
-            child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Email',
-                  hintText: 'email@example.com',
-                  contentPadding: const EdgeInsets.all(8.0),
-                  prefixIcon: const Icon(Icons.email_outlined),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(7.0),
-                  ),
-                ),
-                controller: emailController,
-                validator: (String? value) {
-                  if (value == null || value == '') {
-                    return 'Email is required !';
-                  } else if (value.contains('@') == false) {
-                    return 'Pease enter a vaild email';
-                  }
-
-                  return null;
-                }),
-          ),
-          Container(
-            margin: const EdgeInsets.all(10.0),
-          ),
-          SizedBox(
-              width: 400,
-              child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: '************',
-                      contentPadding: const EdgeInsets.all(8.0),
-                      prefixIcon: const Icon(Icons.lock_outlined),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            passToggle = !passToggle;
-                          });
-                        },
-                        child: Icon(!passToggle
-                            ? Icons.visibility
-                            : Icons.visibility_off),
-                      ),
-                      border: OutlineInputBorder(
-                        //borderSide: BorderSide.none,
-                        borderRadius: BorderRadius.circular(7.0),
-                      )),
-                  obscureText: passToggle,
-                  obscuringCharacter: '.',
-                  controller: passwordController,
-                  validator: (String? value) {
-                    if (value == null || value == '') {
-                      return 'Password is required !';
-                    } else if (value.length < 8) {
-                      return 'Password is too short !';
-                    }
-
-                    return null;
-                  })),
+          LoginWidgets.EmailInput(emailController),
+          Container(margin: const EdgeInsets.all(10.0)),
+          LoginWidgets.PasswordInput(passwordController, toggleSecureText),
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: SizedBox(
-                width: 400,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      String email = emailController.toString();
-                      String password = passwordController.toString();
-                      setState(() {
-                        isResponseReceived = true;
-                      });
-                      String submitingFormResponse =
-                          await submitForm(email, password);
-                    } else {}
-                  },
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50),
-                      backgroundColor: Colors.green.shade400),
-                  child: const Text('Submit'),
-                ),
-              ))
+              child: LoginWidgets.SubmitButton(
+                  _formKey, emailController, passwordController))
         ],
       ),
     );
