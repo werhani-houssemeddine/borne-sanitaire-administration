@@ -11,8 +11,8 @@ Widget makeSubmitButtonWidget(
       //! In future Version we will separate onPressed function
       onPressed: () async {
         if (formKey.currentState!.validate()) {
-          String email = emailController.toString();
-          String password = passwordController.toString();
+          String email = emailController.value.text;
+          String password = passwordController.value.text;
 
           String submitingFormResponse = await submitForm(email, password);
 
