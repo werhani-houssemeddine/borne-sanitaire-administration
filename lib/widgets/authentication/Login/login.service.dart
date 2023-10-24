@@ -30,9 +30,9 @@ Future<String> submitForm(String email, String password) async {
     //! the logic behind this API Is to send error and state to indicate
     //! if the request is made properly [error refers that the request in not valid]
     //! and state will indicate the if the request made successfully
-    if (error == false && state == "failure") {
+    if (error == false && state == "FAILURE") {
       return "FAILURE";
-    } else if (error == false && state == "success") {
+    } else if (error == false && state == "SUCCESS") {
       return "SUCCESS";
     }
 
