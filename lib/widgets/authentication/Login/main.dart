@@ -138,8 +138,10 @@ class _LoginFormState extends State<_LoginForm> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      String response =
-                          await submitForm(emailController, passwordController);
+                      String email = emailController.toString();
+                      String password = passwordController.toString();
+                      String submitingFormResponse =
+                          await submitForm(email, password);
                     } else {}
                   },
                   style: ElevatedButton.styleFrom(
