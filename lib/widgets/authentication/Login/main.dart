@@ -53,6 +53,7 @@ class _LoginForm extends StatefulWidget {
 class _LoginFormState extends State<_LoginForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool passToggle = true;
+  bool isResponseReceived = false;
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -140,6 +141,9 @@ class _LoginFormState extends State<_LoginForm> {
                     if (_formKey.currentState!.validate()) {
                       String email = emailController.toString();
                       String password = passwordController.toString();
+                      setState(() {
+                        isResponseReceived = true;
+                      });
                       String submitingFormResponse =
                           await submitForm(email, password);
                     } else {}
