@@ -86,7 +86,7 @@ class _LoginFormState extends State<_LoginForm> {
           Padding(
               padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: LoginWidgets.SubmitButton(
-                  _formKey, emailController, passwordController))
+                  context, _formKey, emailController, passwordController))
         ],
       ),
     );
