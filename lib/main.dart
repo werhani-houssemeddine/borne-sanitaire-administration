@@ -1,4 +1,5 @@
 import 'package:borne_sanitaire_admin/widgets/authentication/Login/main.dart';
+import 'package:borne_sanitaire_admin/widgets/authentication/verify_code/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -35,10 +36,16 @@ class _MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: _isDeviceSupported == false
+      /*home: _isDeviceSupported == false
           ? unSupportedDevice()
-          : supportedDevice(const Login()),
+          : supportedDevice(const Login()),*/
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Login(),
+        '/verification-code': (context) => const VerifyCode(),
+        '/home': (context) => const Text('Welcome Home Page')
+      },
     );
   }
 }
