@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 Widget makeSubmitButtonWidget(
     GlobalKey<FormState> formKey,
     TextEditingController emailController,
-    TextEditingController passwordController) {
+    TextEditingController passwordController,
+    void Function() gotToVerificationCode) {
   return SizedBox(
     width: 400,
     child: ElevatedButton(
@@ -24,6 +25,8 @@ Widget makeSubmitButtonWidget(
           ];
           if (submitingFormResponse == listOfResponse[0]) {
             passwordController.clear();
+          } else if (submitingFormResponse == listOfResponse[1]) {
+            gotToVerificationCode();
           }
         } else {}
       },
