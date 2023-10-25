@@ -41,10 +41,17 @@ class LoginWidgets {
   }
 
   static Widget SubmitButton(
+      BuildContext context,
       GlobalKey<FormState> formKey,
       TextEditingController emailController,
       TextEditingController passwordController) {
-    return makeSubmitButtonWidget(formKey, emailController, passwordController);
+    //! this will be a moved to a class to handle all possible action
+    void goToVerificationCode() {
+      Navigator.pushNamed(context, '/verification-code');
+    }
+
+    return makeSubmitButtonWidget(
+        formKey, emailController, passwordController, goToVerificationCode);
   }
 
   /*static Widget ErrorText() {}
