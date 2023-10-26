@@ -7,8 +7,11 @@ enum Validators { EMAIL_VALIDATOR, PASSWORD_VALIDATOR }
 Widget makeInputWidget(InputDecoration decoration,
     TextEditingController controller, Validators validator,
     {bool secureText = false}) {
-  return SizedBox(
+  return Container(
     width: 400,
+    height: 80,
+    padding: const EdgeInsets.all(8.0),
+    margin: const EdgeInsets.only(bottom: 4.0),
     child: TextFormField(
         decoration: decoration,
         controller: controller,

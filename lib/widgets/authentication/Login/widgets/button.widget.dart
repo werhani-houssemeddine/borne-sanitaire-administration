@@ -6,8 +6,10 @@ Widget makeSubmitButtonWidget(
     TextEditingController emailController,
     TextEditingController passwordController,
     void Function() gotToVerificationCode) {
-  return SizedBox(
+  return Container(
     width: 400,
+    height: 65,
+    padding: const EdgeInsets.all(8.0),
     child: ElevatedButton(
       //! In future Version we will separate onPressed function
       onPressed: () async {
