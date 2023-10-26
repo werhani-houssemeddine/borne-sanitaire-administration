@@ -1,8 +1,13 @@
 import 'package:borne_sanitaire_admin/widgets/authentication/Login/widgets/button.widget.dart';
+import 'package:borne_sanitaire_admin/widgets/authentication/Login/widgets/form.widget.dart';
 import 'package:borne_sanitaire_admin/widgets/authentication/Login/widgets/input.widget.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidgets {
+  static Widget Login() {
+    return const LoginForm();
+  }
+
   static Widget EmailInput(TextEditingController controller) {
     InputDecoration decoration = InputDecoration(
       labelText: 'Email',

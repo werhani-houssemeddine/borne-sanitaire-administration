@@ -9,12 +9,12 @@ class Login extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: null,
       resizeToAvoidBottomInset: false,
       body: Row(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16.0),
           ),
           Flexible(
@@ -22,7 +22,7 @@ class Login extends StatelessWidget {
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Flexible(
+                  const Flexible(
                     flex: 1,
                     child: Text(
                       "Borne Sanitaire Administration",
@@ -32,58 +32,11 @@ class Login extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Expanded(child: _LoginForm())
+                  Expanded(child: LoginWidgets.Login())
                 ]),
           ),
-          Expanded(
+          const Expanded(
               child: Image(image: AssetImage('assets/Security-On-bro.png')))
-        ],
-      ),
-    );
-  }
-}
-
-class _LoginForm extends StatefulWidget {
-  const _LoginForm();
-
-  @override
-  State<_LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<_LoginForm> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool passToggle = true;
-  bool isResponseReceived = false;
-
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
-  bool toggleSecureText() {
-    setState(() {
-      passToggle = !passToggle;
-    });
-
-    return passToggle;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          LoginWidgets.EmailInput(emailController),
-          LoginWidgets.PasswordInput(passwordController, toggleSecureText),
-          LoginWidgets.SubmitButton(
-              context, _formKey, emailController, passwordController),
         ],
       ),
     );
