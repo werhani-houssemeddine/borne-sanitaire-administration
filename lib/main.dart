@@ -42,7 +42,7 @@ class _MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => const Login(),
+        '/': (context) => const LoginScreen(),
         '/verification-code': (context) => const VerifyCode(),
         '/home': (context) => const Text('Welcome Home Page')
       },
