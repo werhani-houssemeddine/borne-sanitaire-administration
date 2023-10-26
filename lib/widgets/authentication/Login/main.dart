@@ -81,12 +81,9 @@ class _LoginFormState extends State<_LoginForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           LoginWidgets.EmailInput(emailController),
-          Container(margin: const EdgeInsets.all(10.0)),
           LoginWidgets.PasswordInput(passwordController, toggleSecureText),
-          Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: LoginWidgets.SubmitButton(
-                  context, _formKey, emailController, passwordController))
+          LoginWidgets.SubmitButton(
+              context, _formKey, emailController, passwordController),
         ],
       ),
     );
