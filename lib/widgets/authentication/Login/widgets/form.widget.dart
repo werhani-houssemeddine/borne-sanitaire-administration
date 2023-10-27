@@ -36,15 +36,22 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          LoginWidgets.EmailInput(emailController),
-          LoginWidgets.PasswordInput(passwordController, toggleSecureText),
-          LoginWidgets.SubmitButton(
-              context, _formKey, emailController, passwordController),
-        ],
-      ),
+      child: Container(
+          height: 500,
+          decoration: BoxDecoration(
+              boxShadow: kElevationToShadow[4],
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20.0)),
+          padding: const EdgeInsets.only(bottom: 30.0, left: 20.0, right: 20.0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                LoginWidgets.EmailInput(emailController),
+                LoginWidgets.PasswordInput(
+                    passwordController, toggleSecureText),
+                LoginWidgets.SubmitButton(
+                    context, _formKey, emailController, passwordController),
+              ])),
     );
   }
 }
