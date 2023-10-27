@@ -34,7 +34,7 @@ Widget makeSubmitButtonWidget(
       },
       style: ElevatedButton.styleFrom(
           minimumSize: const Size.fromHeight(50),
-          backgroundColor: Colors.green.shade400),
+          backgroundColor: Colors.greenAccent.shade400),
       child: const Text('Submit'),
     ),
   );
