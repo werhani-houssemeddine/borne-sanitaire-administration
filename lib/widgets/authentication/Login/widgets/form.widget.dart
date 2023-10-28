@@ -17,6 +17,9 @@ class _LoginFormState extends State<LoginForm> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
+  bool error = false;
+  String _errorMessage = "";
+
   @override
   void dispose() {
     emailController.dispose();
@@ -30,6 +33,15 @@ class _LoginFormState extends State<LoginForm> {
     });
 
     return passToggle;
+  }
+
+  getStateErrorMessage(String errorMessage) {
+    setState(() {
+      error = true;
+      if (errorMessage == "WRONG CREDENTIALS") {
+        _errorMessage = "Username or password are wrong";
+      }
+    });
   }
 
   @override
@@ -46,11 +58,11 @@ class _LoginFormState extends State<LoginForm> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
-                LoginWidgets.EmailInput(emailController),
+                LoginWidgets.EmailInput(emailController, error, _errorMessage),
                 LoginWidgets.PasswordInput(
-                    passwordController, toggleSecureText),
-                LoginWidgets.SubmitButton(
-                    context, _formKey, emailController, passwordController),
+                    passwordController, toggleSecureText, error, _errorMessage),
+                LoginWidgets.SubmitButton(context, _formKey, emailController,
+                    passwordController, getStateErrorMessage),
               ])),
     );
   }
