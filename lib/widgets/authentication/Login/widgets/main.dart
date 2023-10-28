@@ -32,22 +32,23 @@ class LoginWidgets {
     );
   }
 
-  static Widget EmailInput(TextEditingController controller) {
+  static Widget EmailInput(
+      TextEditingController controller, bool error, String errorMessage) {
     InputDecoration decoration = InputDecoration(
-      labelText: 'Email',
-      hintText: 'email@example.com',
-      contentPadding: const EdgeInsets.all(8.0),
-      prefixIcon: const Icon(Icons.email_outlined),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(7.0),
-      ),
-    );
+        labelText: 'Email',
+        hintText: 'email@example.com',
+        contentPadding: const EdgeInsets.all(8.0),
+        prefixIcon: const Icon(Icons.email_outlined),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(7.0),
+        ),
+        errorText: error ? errorMessage : null);
 
     return makeInputWidget(decoration, controller, Validators.EMAIL_VALIDATOR);
   }
 
-  static Widget PasswordInput(
-      TextEditingController controller, bool Function() togglePass) {
+  static Widget PasswordInput(TextEditingController controller,
+      bool Function() togglePass, bool error, String errorMessage) {
     InputDecoration decoration = InputDecoration(
         labelText: 'Password',
         hintText: '************',
@@ -62,7 +63,8 @@ class LoginWidgets {
         border: OutlineInputBorder(
           //borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(7.0),
-        ));
+        ),
+        errorText: error ? errorMessage : null);
 
     return makeInputWidget(
         decoration, controller, Validators.PASSWORD_VALIDATOR,
@@ -73,14 +75,15 @@ class LoginWidgets {
       BuildContext context,
       GlobalKey<FormState> formKey,
       TextEditingController emailController,
-      TextEditingController passwordController) {
+      TextEditingController passwordController,
+      getStateErrorMessage) {
     //! this will be a moved to a class to handle all possible action
     void goToVerificationCode() {
       Navigator.pushNamed(context, '/verification-code');
     }
 
-    return makeSubmitButtonWidget(
-        formKey, emailController, passwordController, goToVerificationCode);
+    return makeSubmitButtonWidget(formKey, emailController, passwordController,
+        goToVerificationCode, getStateErrorMessage);
   }
 
   /*static Widget ErrorText() {}
