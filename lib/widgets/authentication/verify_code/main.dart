@@ -52,6 +52,7 @@ class _VerifyCodeFormState extends State<_VerifyCodeForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final verifyCodeController = TextEditingController();
+  String customErrorMessage = "";
 
   @override
   void dispose() {
@@ -71,14 +72,15 @@ class _VerifyCodeFormState extends State<_VerifyCodeForm> {
             width: 400,
             child: TextFormField(
               decoration: InputDecoration(
-                labelText: 'Verification code',
-                hintText: 'xXxXxXxXx',
-                contentPadding: const EdgeInsets.all(8.0),
-                prefixIcon: const Icon(Icons.security),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(7.0),
-                ),
-              ),
+                  labelText: 'Verification code',
+                  hintText: 'xXxXxXxXx',
+                  contentPadding: const EdgeInsets.all(8.0),
+                  prefixIcon: const Icon(Icons.security),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(7.0),
+                  ),
+                  errorText:
+                      customErrorMessage != "" ? customErrorMessage : null),
               maxLength: 8,
               controller: verifyCodeController,
               validator: (String? value) {
@@ -101,9 +103,14 @@ class _VerifyCodeFormState extends State<_VerifyCodeForm> {
                   String code = verifyCodeController.value.text;
                   String sendCodeResponse = await sendVerificationCode(code);
                   if (sendCodeResponse == "SUCCESS") {
-                    Navigator.pushNamed(context, "/home");
+                    //Navigator.pushNamed(context, "/home");
                   } else if (sendCodeResponse == "BLOCKED") {
-                    Navigator.pop(context);
+                    //Navigator.pop(context);
+                  } else if (sendCodeResponse == "NOT BLOCKED") {
+                    setState(() {
+                      customErrorMessage = "Wrong Code providen";
+                    });
+                    verifyCodeController.clear();
                   }
                 }
               },
