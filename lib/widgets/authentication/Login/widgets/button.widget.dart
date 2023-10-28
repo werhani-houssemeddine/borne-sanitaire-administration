@@ -5,7 +5,8 @@ Widget makeSubmitButtonWidget(
     GlobalKey<FormState> formKey,
     TextEditingController emailController,
     TextEditingController passwordController,
-    void Function() gotToVerificationCode) {
+    void Function() gotToVerificationCode,
+    getStateErrorMessage) {
   return Container(
     width: 400,
     height: 65,
@@ -22,10 +23,13 @@ Widget makeSubmitButtonWidget(
           List<String> listOfResponse = [
             "FAILURE",
             "SUCCESS",
+            "WRONG CREDENTIALS",
             "UNKNOWN ERROR",
             "INTERNAL SERVER ERROR"
           ];
-          if (submitingFormResponse == listOfResponse[0]) {
+          print(submitingFormResponse);
+          if (submitingFormResponse == listOfResponse[2]) {
+            getStateErrorMessage(listOfResponse[2]);
             passwordController.clear();
           } else if (submitingFormResponse == listOfResponse[1]) {
             gotToVerificationCode();
