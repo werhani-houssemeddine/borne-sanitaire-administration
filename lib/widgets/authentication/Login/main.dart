@@ -11,7 +11,6 @@ class LoginScreen extends StatelessWidget {
     double width = size.width;
     double height = size.height;
 
-    print("Width $width");
     return Scaffold(
         appBar: null,
         resizeToAvoidBottomInset: false,
