@@ -35,7 +35,7 @@ String? Function(String?)? customValidators(Validators validator) {
     return (String? value) {
       if (value == null || value == '') {
         return 'Password is required !';
-      } else if (value.length < 8) {
+      } else if (value.length < 10) {
         return 'Password is too short !';
       }
 
