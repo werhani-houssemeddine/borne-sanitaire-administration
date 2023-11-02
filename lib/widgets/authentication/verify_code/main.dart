@@ -103,9 +103,9 @@ class _VerifyCodeFormState extends State<_VerifyCodeForm> {
                   String code = verifyCodeController.value.text;
                   String sendCodeResponse = await sendVerificationCode(code);
                   if (sendCodeResponse == "SUCCESS") {
-                    //Navigator.pushNamed(context, "/home");
+                    Navigator.pushNamed(context, "/home");
                   } else if (sendCodeResponse == "BLOCKED") {
-                    //Navigator.pop(context);
+                    Navigator.pop(context);
                   } else if (sendCodeResponse == "NOT BLOCKED") {
                     setState(() {
                       customErrorMessage = "Wrong Code providen";
