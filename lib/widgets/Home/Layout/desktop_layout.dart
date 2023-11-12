@@ -1,3 +1,4 @@
+import 'package:borne_sanitaire_admin/widgets/Home/Widgets/app_bar.dart';
 import 'package:borne_sanitaire_admin/widgets/Home/Widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,15 @@ class _DesktopLayoutState extends State<DesktopLayout> {
       body: Row(
         children: [
           NavBar(screenNavigator: screenNavigator),
-          Container(child: manipulateBody()),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(5),
+              child: Scaffold(
+                appBar: HomePageNavBar(),
+                body: manipulateBody(),
+              ),
+            ),
+          ),
         ],
       ),
     );
