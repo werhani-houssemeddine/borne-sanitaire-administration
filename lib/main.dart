@@ -1,7 +1,8 @@
+import 'package:borne_sanitaire_admin/widgets/Home/main.dart';
 import 'package:borne_sanitaire_admin/widgets/authentication/Login/main.dart';
 import 'package:borne_sanitaire_admin/widgets/authentication/verify_code/main.dart';
 import 'package:flutter/material.dart';
-import 'dart:io';
+import 'dart:io' show Platform;
 
 void main() => runApp(const MyApp());
 
@@ -10,41 +11,53 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _MainApp();
+    return const _MainApp();
   }
 }
 
 class _MainApp extends StatelessWidget {
-  _MainApp();
-  final bool _isDeviceSupported = Platform.isAndroid || Platform.isWindows;
+  const _MainApp();
 
-  Widget unSupportedDevice() {
-    return const Center(
-      child: Column(
-        children: <Widget>[
-          Text('Unsupported Device Please try either our desktop'),
-          Text('application or our mobile application')
-        ],
-      ),
+  @override
+  Widget build(BuildContext context) {
+    final bool isDeviceSupported = Platform.isAndroid || Platform.isWindows;
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: isDeviceSupported
+          ? const _SupportedDevice()
+          : const _UnsupportedDevice(),
     );
   }
+}
 
-  Widget supportedDevice(Widget mainWidget) {
-    return mainWidget;
+class _UnsupportedDevice extends StatelessWidget {
+  const _UnsupportedDevice();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Wrap(
+      children: [
+        Text(
+          "Unsupported Device please try either our desktop application or our mobile application",
+        ),
+      ],
+    );
   }
+}
+
+class _SupportedDevice extends StatelessWidget {
+  const _SupportedDevice();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      /*home: _isDeviceSupported == false
-          ? unSupportedDevice()
-          : supportedDevice(const Login()),*/
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
+      initialRoute: '/home',
       routes: {
         '/': (context) => const LoginScreen(),
         '/verification-code': (context) => const VerifyCode(),
-        '/home': (context) => const Text('Welcome Home Page')
+        '/home': (context) => const HomeScreen()
       },
     );
   }
