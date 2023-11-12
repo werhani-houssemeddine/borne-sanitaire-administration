@@ -1,5 +1,6 @@
 import 'package:borne_sanitaire_admin/widgets/Home/Widgets/app_bar.dart';
 import 'package:borne_sanitaire_admin/widgets/Home/Widgets/nav_bar.dart';
+import 'package:borne_sanitaire_admin/widgets/Home/screens/profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:borne_sanitaire_admin/widgets/Home/utils.dart';
@@ -28,7 +29,7 @@ class _DesktopLayoutState extends State<DesktopLayout> {
     } else if (currentScreen == NAVIGATION_WIDGET.SETTINGS) {
       return settings;
     } else if (currentScreen == NAVIGATION_WIDGET.PROFILE) {
-      return profile;
+      return const ProfileScreen();
     } else {
       return dashboard;
     }
