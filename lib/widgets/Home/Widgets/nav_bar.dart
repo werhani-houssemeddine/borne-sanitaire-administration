@@ -18,7 +18,7 @@ class NavBar extends StatelessWidget {
         decoration: _navBarBoxDecoration(),
         child: Column(
           children: [
-            const UserProfile(),
+            // const UserProfile(),
             NavBarLinks(screenNavigator: screenNavigator),
             const Logout(),
           ],
