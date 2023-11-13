@@ -1,3 +1,4 @@
+import 'package:borne_sanitaire_admin/widgets/Home/Widgets/profile_data.dart';
 import 'package:borne_sanitaire_admin/widgets/Home/Widgets/profile_section.dart';
 import 'package:flutter/material.dart';
 
@@ -72,6 +73,7 @@ class LargeSreen extends StatelessWidget {
       children: [
         const ProfileSection(),
         _divider(),
+        const ChangeProfileData(),
       ],
     );
   }
