@@ -8,8 +8,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print(size.width);
-
     return Container(
       margin: const EdgeInsets.only(bottom: 5, right: 5),
       width: double.infinity,
