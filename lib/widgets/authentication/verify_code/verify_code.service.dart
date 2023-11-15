@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:borne_sanitaire_admin/global_state.dart';
 import 'package:http/http.dart' as http;
 
 Future _sendCode(Object? body) async {
@@ -28,8 +29,6 @@ Future<String> sendVerificationCode(String code) async {
   var message = data["message"];
   var responseData = data["data"];
 
-  print(data);
-
   if (statusCode >= 200 && statusCode < 300) {
     if (error == false && state.toUpperCase() == "FAILURE") {
       //? Check if user is blocked
@@ -42,6 +41,23 @@ Future<String> sendVerificationCode(String code) async {
       /*if (responseData['token'] != null) {
         return "SUCCESS";
       }*/
+
+      var userData = responseData['data'];
+
+      String email = userData['email'];
+      String username = userData['username'];
+      String token = userData['token'];
+      String phoneNumber = userData['phone_number'];
+
+      MySingleton(
+        User(
+          email: email,
+          token: token,
+          phoneNumber: phoneNumber,
+          username: username,
+        ),
+      );
+
       return "SUCCESS";
     }
 
