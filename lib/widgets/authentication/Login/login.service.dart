@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:borne_sanitaire_admin/widgets/global_state.dart';
 import 'package:http/http.dart' as http;
 
 Future<String> submitForm(String email, String password) async {
@@ -12,6 +13,25 @@ Future<String> submitForm(String email, String password) async {
         return response['message'];
       } else {
         //! Return SUCCESS
+        var data = response['details'];
+
+        String email = data['email'];
+        String username = data['username'];
+        String token = data['token'];
+        // ignore: non_constant_identifier_names
+        String phone_number = data['phone_number'];
+
+        MySingleton userSingleton = MySingleton(
+          User(
+            email: email,
+            token: token,
+            phoneNumber: phone_number,
+            username: username,
+          ),
+        );
+
+        print(userSingleton.user.value());
+
         return response['state'];
       }
     } else if (response['statusCode'] < 500) {
@@ -62,6 +82,8 @@ class _LoginService {
       if (data["data"] != null) {
         if (data["data"]["details"] != null) {
           details = data["data"]["details"];
+        } else {
+          details = data["data"];
         }
       }
 
